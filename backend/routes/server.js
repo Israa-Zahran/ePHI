@@ -1,7 +1,6 @@
 // const express = require('express');
 // const bodyParser = require('body-parser');
 // const cors = require('cors');
-// const indexRouter = express.Router();
 
 // const app = express();
 
@@ -18,12 +17,10 @@
 //   if (!user) {
 //     return res.status(401).json({ message: 'Invalid credentials' });
 //   }
-//   console.log("name below")
-// console.log(user.name);
 
 //   // Generate a token for the user and return it to the client
 //   const token = generateToken(user);
-//   res.json({ token:token,name:user.name });
+//   res.json({ token });
 // });
 
 // app.post('/signup', (req, res) => {
@@ -39,9 +36,10 @@
 
 //   // Generate a token for the new user and return it to the client
 //   const token = generateToken(newUser);
-//   res.json({ token:token,name:newUser.name });
+//   res.json({ token });
 // });
 
+// app.listen(4000, () => console.log('Server running on port 4000'));
 
 // // Helper function to generate a token for a user
 // function generateToken(user) {
@@ -55,15 +53,4 @@
 // }
 
 
-// app.listen(3002, () => console.log('Server running on port 3002'));
-// module.exports = indexRouter;
-
-
-const { response } = require('express');
-var express = require('express');
-// var unirest = require('unirest');
-
-var router = express.Router();
-
- 
- module.exports = router;
+// app.listen(4000, () => console.log('Server running on port 4000'));

@@ -8,6 +8,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 
+// const express = require('express');
+
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+// const app = express();
+
 
 
 
@@ -15,9 +22,11 @@ var indexRouter = require('./routes/index');
 const authRoutes = require('./routes/authRoutes');
 
 var usersRouter = require('./routes/users');
+const auth = require('./middleware/auth');
 
 var app = express();
-
+app.use(bodyParser.json());
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -31,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRoutes);
+
+
 
 
 // catch 404 and forward to error handler

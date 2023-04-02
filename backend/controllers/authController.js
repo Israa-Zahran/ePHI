@@ -4,19 +4,6 @@ const userModel = require('../models/userModel');
 
 
 
-// const crypto = require('crypto');
-
-// const generateSecretKey = (length) => {
-//   return crypto.randomBytes(Math.ceil(length / 2)).toString('hex').slice(0, length);
-// };
-
-// // Usage
-// const secretKey = generateSecretKey(64); // generates a 64-character secret key
-// console.log("hhhhhhhhhhhhhhwjdhedjkkhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-// console.log(secretKey);
-
-
-
 class AuthController {
   async signup(req, res) {
     const { name, email, password } = req.body;
@@ -38,6 +25,9 @@ class AuthController {
     res.status(201).json({ user, token });
   }
 
+
+
+
   async login(req, res) {
     const { email, password } = req.body;
 
@@ -53,8 +43,21 @@ class AuthController {
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
-    res.json({ user, token });
+    res.json({ token });
   }
+
+ 
+  async getUserByEmail(req, res) {
+    const { email } = req.query;
+    const user = await userModel.findUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    
+    res.json({ user });
+  }
+
 }
 
 module.exports = new AuthController();
