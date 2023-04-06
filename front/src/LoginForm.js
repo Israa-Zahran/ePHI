@@ -23,14 +23,14 @@ function LoginForm(props) {
         axios.post('http://localhost:3002/auth/login', { email, password })
             .then(response => {
                 const token = response.data.token;
-                const Email=response.data.email;
+                
 
                 localStorage.setItem("token", token);
                 
-            localStorage.setItem("email", email);
+            localStorage.setItem("Email", email);
 
 
-                navigate("/welcome");
+                navigate("/userData");
             })
             .catch(error => {
                 setErrorMessage(error.response.data.message);

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import SignupForm from './SignupForm';
-import WelcomePage from './WelcomePage';
+import UserData from './UserData';
 
 function App() {
   const [showLoginForm, setShowLoginForm] = React.useState(true);
@@ -22,12 +22,7 @@ function App() {
               ) : (
                 <SignupForm toggleForm={toggleForm} isLoginForm={false} />
               )}
-              {/* <div className="d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={toggleForm}>
-                  {showLoginForm ? 'Create an account' : 'Already have an account?'}
-                </button>
-                <div className="ml-auto"></div>
-              </div> */}
+             
             </div>
           </div>
         </div>
@@ -41,7 +36,7 @@ function AppWrapper() {
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/welcome" element={<WelcomePage />} />
+        <Route path="/userData" element={<UserData />} />
       </Routes>
     </Router>
   );
