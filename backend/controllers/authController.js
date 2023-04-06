@@ -6,7 +6,7 @@ const userModel = require('../models/userModel');
 
 class AuthController {
   async signup(req, res) {
-    const { name, email, password } = req.body;
+    const { name, email,DateOfBirth, MedicalHistory, MedicationsAndDosages, Allergies, MedicalTestResults, password } = req.body;
 
     const existingUser = await userModel.findUserByEmail(email);
     if (existingUser) {
@@ -17,7 +17,7 @@ class AuthController {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    const user = await userModel.createUser({ name, email, password: hashedPassword });
+    const user = await userModel.createUser({ name, email,DateOfBirth, MedicalHistory, MedicationsAndDosages, Allergies, MedicalTestResults, password: hashedPassword });
    
 
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
@@ -57,6 +57,35 @@ class AuthController {
     
     res.json({ user });
   }
+
+
+
+
+  async editUser(req, res) {
+    const { email } = req.query;
+    const { name, DateOfBirth, MedicalHistory, MedicationsAndDosages, Allergies, MedicalTestResults } = req.body;
+  
+    const user = await userModel.findUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+  
+    // update userData
+    user.name = name;
+    user.DateOfBirth = DateOfBirth;
+    user.MedicalHistory = MedicalHistory;
+    user.MedicationsAndDosages = MedicationsAndDosages;
+    user.Allergies = Allergies;
+    user.MedicalTestResults = MedicalTestResults;
+  
+    return res.status(200).json({ message: 'User data updated successfully' });
+  }
+  
+
+
+
+  
+
 
 }
 
